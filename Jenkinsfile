@@ -23,9 +23,11 @@ pipeline {
 
         stage('Deploy with Docker') {
             steps {
-                bat 'docker build -t coderwanda-webapp:1.0 .'
-                bat 'docker rm -f coderwanda-container 2>NUL'
-                bat 'docker run -d -p 3000:3000 --name coderwanda-container coderwanda-webapp:1.0'
+                bat '"C:\\Users\\DEFAULT.DESKTOP-MKB5J3F\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t coderwanda-webapp:1.0 .'
+
+                bat '"C:\\Users\\DEFAULT.DESKTOP-MKB5J3F\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm -f coderwanda-container 2>NUL'
+
+                bat '"C:\\Users\\DEFAULT.DESKTOP-MKB5J3F\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d -p 3000:3000 --name coderwanda-container coderwanda-webapp:1.0'
             }
         }
     }
