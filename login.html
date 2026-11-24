@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODERWANDA | Login</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Arial, sans-serif; background: #f1f5f9; }
+        header { background: #102a43; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #38bdf8; font-size: 23px; font-weight: bold; text-decoration: none; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; }
+        .container { min-height: 80vh; display: flex; justify-content: center; align-items: center; padding: 25px; }
+        .form-box { background: white; padding: 35px; width: 100%; max-width: 420px; border-radius: 12px; box-shadow: 0 4px 15px #00000015; }
+        h1 { text-align: center; color: #102a43; }
+        .subtitle { text-align: center; color: #64748b; margin-bottom: 25px; }
+        label { display: block; margin: 15px 0 7px; font-weight: bold; }
+        input { width: 100%; padding: 13px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        button { width: 100%; padding: 13px; background: #0284c7; color: white; border: none; border-radius: 6px; margin-top: 22px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0369a1; }
+        .message { text-align: center; margin-top: 15px; }
+        .signup { text-align: center; margin-top: 20px; }
+        .signup a { color: #0284c7; }
+        footer { background: #102a43; color: white; text-align: center; padding: 18px; }
+        @media(max-width: 600px) { header { flex-direction: column; gap: 15px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">CODERWANDA</a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="form-box">
+        <h1>Welcome Back!</h1>
+        <p class="subtitle">Login to your CODERWANDA account.</p>
+
+        <form id="loginForm">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p id="message" class="message" aria-live="polite"></p>
+
+        <p class="signup">
+            Don't have an account?
+            <a href="register.html">Register here</a>
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 CODERWANDA Ltd.</p>
+</footer>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const password = document.getElementById("password").value;
+        const users = JSON.parse(localStorage.getItem("demoUsers") || "[]");
+
+        const user = users.find(account =>
+            account.email === email && account.password === password
+        );
+
+        const message = document.getElementById("message");
+
+        if (user) {
+            message.style.color = "green";
+            message.textContent = "Login successful! Welcome, " + user.name + ".";
+        } else {
+            message.style.color = "red";
+            message.textContent = "Invalid email or password. Please register first.";
+        }
+    });
+</script>
+
+</body>
+</html>
